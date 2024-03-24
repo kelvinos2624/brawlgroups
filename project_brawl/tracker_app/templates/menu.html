@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Page</title>
+</head>
+<body>
+    <h1>Welcome to the Menu Page, {{ player_name }}</h1>
+    {% if converted_tilt %}
+        <h2>Tilted Brawlers:</h2>
+        <ul>
+            {% for brawler, tilt in converted_tilt.items %}
+                <li>{{ brawler }}: {{ tilt }} trophies</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No tilted brawlers found.</p>
+    {% endif %}
+    <a href="javascript:history.back()">Back</a>
+</body>
+</html>

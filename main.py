@@ -1,15 +1,15 @@
 import requests
 import os
+from dotenv import load_dotenv, dotenv_values
 from flask import Flask, redirect, url_for
 
+load_dotenv()
 app = Flask(__name__)
-
-
 
 def authenticate(player):
     url = f"https://api.brawlstars.com/v1/players/%23{player}"
     headers = {
-        "Authorization" : "Bearer " + os.getenv(api_key)
+        "Authorization" : "Bearer " + os.getenv("API_KEY")
     }
     response = requests.get(url, headers=headers)
     return response

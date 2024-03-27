@@ -22,7 +22,8 @@ body {
 
   button {
     font-size: 25px;
-    background-color: 'green';
+    justify-content: center;
+    align-items: center;
   }
 
   h1 {
@@ -65,7 +66,7 @@ ul {
   p {
     color: aliceblue;
     line-height: 1.3em;
-    text-align: left;
+    text-align: center;
     width: 100%;
     font-family: Helvetica;
     font-size: 18px;
@@ -113,9 +114,4 @@ ul {
     box-shadow: 5px 0px 5px 0px rgba(0, 0, 50, 0.97);
     float: left;
     width: 50px;
-  }
-
-  .back-button {
-    color: "green";
-    text-align: center;
   }

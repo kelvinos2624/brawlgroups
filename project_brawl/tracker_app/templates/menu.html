@@ -1,12 +1,14 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Page</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 </head>
 <body>
-    <h1>Welcome to the Menu Page, {{ player_name }}</h1>
+    <h1>Welcome <span id="playerName">{{ player_name }}!</span></h1>
     {% if converted_tilt %}
         <h2>Tilted Brawlers:</h2>
         <ul>
@@ -17,6 +19,8 @@
     {% else %}
         <p>No tilted brawlers found.</p>
     {% endif %}
-    <a href="javascript:history.back()">Back</a>
+    
+    <!-- Add back button -->
+    <a href="javascript:history.back()" class="back-button">Back</a>
 </body>
 </html>

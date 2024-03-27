@@ -1,16 +1,19 @@
 <!-- index.html -->
 
 <!DOCTYPE html>
+
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 </head>
 <body>
     <h1>Welcome to the Brawl Stars Tracker</h1>
     <form action="{% url 'menu' %}" method="GET">
-        <label for="player_id">Enter Player ID: #</label>
+        <label for="player_id">Player ID: #</label>
         <input type="text" id="player_id" name="player_id" required>
         <button type="submit">Submit</button>
     </form>

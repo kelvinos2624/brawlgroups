@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tracker_app',
 ]
 
 MIDDLEWARE = [
@@ -78,8 +79,13 @@ WSGI_APPLICATION = 'project_brawl.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # Secondary PostgreSQL database configuration
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'xZTuKYKlEaPqVBlqcKPJKzhhnyxtrsuz',
+        'HOST': 'roundhouse.proxy.rlwy.net',
+        'PORT': '54872',
     }
 }
 

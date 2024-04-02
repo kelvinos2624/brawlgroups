@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Details</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <h1>Group Details</h1>
+    <h2>{{ group.name }}</h2>
+    <ul>
+        {% for player in players %} 
+        <li> {{ player.player_id }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_player' group_id=group.id %}" class="add-player-button">Add Player</a>
+
+</body>
+</html>
+
+

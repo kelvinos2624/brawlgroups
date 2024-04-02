@@ -1,9 +1,39 @@
 # myapp/views.py
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .forms import Group_Form, Player_Form
+from .models import Brawl_Group, Player
 import requests
 import os
-from dotenv import load_dotenv, dotenv_values
+from dotenv import load_dotenv
 load_dotenv()
+
+def create_group(request):
+    if request.method == 'POST':
+        form = Group_Form(request.POST)
+        if form.is_valid():
+            group = form.save()
+            return redirect('group_detail', group_id=group.id)
+    else:
+        form = Group_Form()
+    return render(request, 'create_group.html', {'form': form})
+
+def add_player(request, group_id):
+    group = Brawl_Group.objects.get(pk=group_id)
+    if request.method == 'POST':
+        form = Player_Form(request.POST)
+        if form.is_valid():
+            player = form.save(commit=False)
+            player.group = group
+            player.save()
+            return redirect('group_detail', group_id=group.id)
+    else:
+        form = Player_Form()
+    return render(request, 'add_player.html', {'form': form, 'group': group})
+
+def group_detail(request, group_id):
+    group = Brawl_Group.objects.get(pk=group_id)
+    players = group.players.all()
+    return render(request, 'group_detail.html', {'group': group, 'players': players})
 
 def authenticate(player):
     url = f"https://api.brawlstars.com/v1/players/%23{player}"

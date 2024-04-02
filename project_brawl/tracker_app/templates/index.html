@@ -1,7 +1,4 @@
-<!-- index.html -->
-
 <!DOCTYPE html>
-
 {% load static %}
 <html lang="en">
 <head>
@@ -17,5 +14,7 @@
         <input type="text" id="player_id" name="player_id" required>
         <button type="submit">Submit</button>
     </form>
+    <h1>Create a New Group</h1>
+    <a href="{% url 'create_group' %}" class="create-group-button">Create Group</a>
 </body>
 </html>

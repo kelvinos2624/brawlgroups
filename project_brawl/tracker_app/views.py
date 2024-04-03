@@ -22,10 +22,18 @@ def add_player(request, group_id):
     if request.method == 'POST':
         form = Player_Form(request.POST)
         if form.is_valid():
-            player = form.save(commit=False)
-            player.group = group
-            player.save()
-            return redirect('group_detail', group_id=group.id)
+            player_id = form.cleaned_data.get('player_id')
+            # Verify if the player ID exists in the API
+            response = authenticate(player_id)
+            if response.status_code == 200:
+                player = form.save(commit=False)
+                player.brawl_name = response.json()["name"]
+                player.group = group
+                player.save()
+                return redirect('group_detail', group_id=group_id)
+            else:
+                error_message = "Player ID does not exist. Please enter a valid player ID."
+                return render(request, 'add_player.html', {'form': form, 'group': group, 'error_message': error_message})
     else:
         form = Player_Form()
     return render(request, 'add_player.html', {'form': form, 'group': group})

@@ -14,7 +14,8 @@ class Brawl_Group(models.Model):
 class Player(models.Model):
     group = models.ForeignKey(Brawl_Group, related_name='players', on_delete=models.CASCADE)
     player_id = models.CharField(max_length=20)
+    brawl_name = models.CharField(max_length=100, default='Unknown')
 
     def __str__(self):
-        return self.player_id
+        return self.brawl_name
     

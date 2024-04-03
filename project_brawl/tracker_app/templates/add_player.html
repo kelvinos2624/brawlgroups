@@ -1,5 +1,18 @@
-<form method="post">
-    {% csrf_token %} 
-    {{ form.as_p }} 
-    <button type="submit">Add Player</button>
-</form>
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Player</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %} 
+        {{ form.as_p }} 
+        <button type="submit">Add Player</button>
+        <button onclick="history.back()">Go Back</button>
+    </form>
+</body>
+</html>

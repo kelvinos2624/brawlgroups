@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index</title>
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <link rel="icon" href="{% static 'sakura_spike.webp' %}" type="image/webp">
 </head>
 <body>
     <h1>Welcome to the Brawl Stars Tracker</h1>
@@ -14,7 +15,38 @@
         <input type="text" id="player_id" name="player_id" required>
         <button type="submit">Submit</button>
     </form>
+    <h1>Group Details</h1>
+    <form id="groupForm">
+        <label for="group_id">Enter Group ID:</label>
+        <input type="text" id="group_id" name="group_id" required>
+        <button type="submit">View Group Details</button>
+    </form>
+    <script>
+        document.getElementById("groupForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+            // Get the group_id value from the input field
+            var group_id = document.getElementById("group_id").value;
+            // Construct the URL with the group_id value
+            var url = "/group-detail/" + encodeURIComponent(group_id);
+            // Redirect the user to the constructed URL
+            fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    // Handle the case where the group doesn't exist
+                    alert("Group not found. Please enter a valid group ID.");
+                } else {
+                    // Redirect the user to the constructed URL
+                    window.location.href = url;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+    </script>
     <h1>Create a New Group</h1>
-    <a href="{% url 'create_group' %}" class="create-group-button">Create Group</a>
+    <form action="{% url 'create_group' %}">
+        <button type="submit">Create Group</button>
+    </form>
 </body>
 </html>

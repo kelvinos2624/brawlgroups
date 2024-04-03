@@ -41,7 +41,7 @@ def add_player(request, group_id):
 def group_detail(request, group_id):
     group = Brawl_Group.objects.get(pk=group_id)
     players = group.players.all()
-    return render(request, 'group_detail.html', {'group': group, 'players': players})
+    return render(request, 'group_detail.html', {'group_id': group_id, 'group': group, 'players': players})
 
 def authenticate(player):
     url = f"https://api.brawlstars.com/v1/players/%23{player}"

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Group Details</title>
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <link rel="icon" href="{% static 'sakura_spike.webp' %}" type="image/webp">
 </head>
 <body>
     <h1>Group Details</h1>
@@ -15,7 +16,9 @@
         <li> {{ player.brawl_name }}</li>
         {% endfor %}
     </ul>
-    <a href="{% url 'add_player' group_id=group.id %}" class="add-player-button">Add Player</a>
+    <form action="{% url 'add_player' group_id=group.id %}">
+        <button type="submit">Add Player</button>
+    </form>
     <button onclick="history.back()">Go Back</button>
 </body>
 </html>

@@ -19,6 +19,26 @@
     <form action="{% url 'add_player' group_id=group.id %}">
         <button type="submit">Add Player</button>
     </form>
+    <div class="card-scroll-container">
+        <div class="card-container">
+          {% for player in players %}
+          <div class="card">
+            <div class="player-name">{{ player.name }}</div>
+            <div class="player-id"><strong><h3>Player:</strong> {{ player }}</h3></div>
+            <div class="tilted-stats">
+                <h2>Tilted Statistics</h2>
+              {% for brawler, stats in player.tilted_stats.items %}
+              <div><h4>{{ brawler }}: {{ stats }}</h4></div>
+              {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      
+      
+      
+      
     <button onclick="history.back()">Go Back</button>
 </body>
 </html>

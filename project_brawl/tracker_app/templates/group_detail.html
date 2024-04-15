@@ -11,20 +11,22 @@
 <body>
     <h1>Group Details</h1>
     <h2>{{ group.name }}</h2>
-    <ul>
-        {% for player in players %} 
-        <li> {{ player.brawl_name }}</li>
-        {% endfor %}
-    </ul>
+
     <form action="{% url 'add_player' group_id=group.id %}">
         <button type="submit">Add Player</button>
     </form>
+    <form action="{% url 'index' %}" method="get">
+        <button type="submit">Back to Home</button>
+    </form>
+    {% for player in players %}
+{% endfor %}
     <div class="card-scroll-container">
         <div class="card-container">
           {% for player in players %}
           <div class="card">
             <div class="player-name">{{ player.name }}</div>
             <div class="player-id"><strong><h3>Player:</strong> {{ player }}</h3></div>
+            <div class="player-trophies"><h4>Trophies: {{ player.total_trophies }}</h4></div>
             <div class="tilted-stats">
                 <h2>Tilted Statistics</h2>
               {% for brawler, stats in player.tilted_stats.items %}
@@ -36,10 +38,8 @@
         </div>
       </div>
       
-      
-      
-      
-    <button onclick="history.back()">Go Back</button>
+    
+
 </body>
 </html>
 

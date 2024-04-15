@@ -13,7 +13,29 @@
         {% csrf_token %} 
         {{ form.as_p }} 
         <button type="submit">Add Player</button>
-        <button onclick="history.back()">Go Back</button>
     </form>
+    <form action="{% url 'group_detail' group_id=group.id %}" method="get">
+        <button type="submit">Back to Group Details</button>
+    </form>
+    <form action="{% url 'edit_group_name' group_id=group.id %}" method="get">
+        {% csrf_token %}
+        <button type="submit" class="link-button">Edit Group Name</button>
+    </form>
+    <!-- List of existing players with delete buttons -->
+    <h2>Existing Players:</h2>
+        {% for player in group.players.all %}
+        <div class="card-scroll-container">
+            <div class="card-container">
+                <div class="card">
+                        <h3>{{ player }}</h3>
+                        <form method="post" action="{% url 'delete_player' group_id=group.id player_id=player.id %}">
+                            {% csrf_token %}
+                            <button type="submit">Delete</button>
+                        </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    
 </body>
 </html>

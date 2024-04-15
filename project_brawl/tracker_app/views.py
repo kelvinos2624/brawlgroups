@@ -1,7 +1,7 @@
 # myapp/views.py
 from django.shortcuts import render, redirect
 from .forms import Group_Form, Player_Form
-from .models import Brawl_Group, Player
+from .models import Group, Player
 import requests
 import os
 from dotenv import load_dotenv
@@ -18,7 +18,7 @@ def create_group(request):
     return render(request, 'create_group.html', {'form': form})
 
 def add_player(request, group_id):
-    group = Brawl_Group.objects.get(pk=group_id)
+    group = Group.objects.get(pk=group_id)
     if request.method == 'POST':
         form = Player_Form(request.POST)
         if form.is_valid():
@@ -38,14 +38,32 @@ def add_player(request, group_id):
         form = Player_Form()
     return render(request, 'add_player.html', {'form': form, 'group': group})
 
+def delete_player(request, group_id, player_id):
+    group = Group.objects.get(pk=group_id)
+    player = Player.objects.get(pk=player_id)
+    player.delete()
+    return redirect('group_detail', group_id=group_id)
+
+def edit_group_name(request, group_id):
+    group = Group.objects.get(pk=group_id)
+    if request.method == 'POST':
+        # If the form is submitted, update the group name
+        new_group_name = request.POST.get('new_group_name')
+        group.name = new_group_name
+        group.save()
+        return redirect('group_detail', group_id=group_id)
+    return render(request, 'edit_group_name.html', {'group': group})
+
 def group_detail(request, group_id):
-    group = Brawl_Group.objects.get(pk=group_id)
+    group = Group.objects.get(pk=group_id)
     players = group.players.all()
 
     for player in players:
         player.tilted_stats = find_tilted_brawlers(authenticate(player.player_id))
-
+        player.total_trophies = get_total_trophies(authenticate(player.player_id))
     return render(request, 'group_detail.html', {'group_id': group_id, 'group': group, 'players': players})
+
+
 
 def authenticate(player):
     url = f"https://api.brawlstars.com/v1/players/%23{player}"
@@ -61,13 +79,17 @@ def find_tilted_brawlers(response):
         tilt[entity["name"]] = entity["highestTrophies"] - entity["trophies"]
     return dict(sorted(tilt.items(), key=lambda x: x[1], reverse=True))
 
+def get_total_trophies(response):
+    return response.json()["trophies"]
+
 def menu(request):
     try:
         player_id = request.GET.get('player_id')
         if player_id:
             response = authenticate(player_id)
             converted_tilt = find_tilted_brawlers(response)
-            return render(request, 'menu.html', {'converted_tilt': converted_tilt, 'player_name': response.json()["name"]})
+            total_trophies = get_total_trophies(response)
+            return render(request, 'menu.html', {'converted_tilt': converted_tilt, 'total_trophies': total_trophies, 'player_name': response.json()["name"]})
     except:
         return render(request, 'error.html', {'message': 'Player ID not provided'})
 

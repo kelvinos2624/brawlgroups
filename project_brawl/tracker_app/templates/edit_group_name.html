@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Group Name</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <link rel="icon" href="{% static 'sakura_spike.webp' %}" type="image/webp">
+</head>
+<body>
+    <h1>Edit Group Name</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="new_group_name">New Group Name:</label>
+        <input type="text" id="new_group_name" name="new_group_name" value="{{ group.name }}" required>
+        <button type="submit">Update Group Name</button>
+    </form>
+</body>
+</html>

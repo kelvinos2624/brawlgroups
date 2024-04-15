@@ -1,9 +1,9 @@
 from django import forms
-from .models import Brawl_Group, Player
+from .models import Group, Player
 
 class Group_Form(forms.ModelForm):
     class Meta:
-        model = Brawl_Group
+        model = Group
         fields = ['name']
 
 class Player_Form(forms.ModelForm):

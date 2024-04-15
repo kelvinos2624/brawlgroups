@@ -24,6 +24,7 @@ body {
     font-size: 25px;
     justify-content: center;
     align-items: center;
+    border-radius: 10px;
   }
 
   h1 {
@@ -128,9 +129,15 @@ ul {
   .card {
     flex: 0 0 auto; /* Let the cards shrink and grow as needed */
     width: 300px; /* Set a fixed width for each card */
+    max-height: 500px;
+    overflow-y: auto;
     border: 1px solid #ccc;
-    margin-right: 10px; /* Add spacing between cards */
-    padding: 10px;
+    margin-right: 20px; /* Add spacing between cards */
+    margin-left: 10px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 25px;
+    border-radius: 20px;
   }
   
   .player-name {
@@ -139,6 +146,11 @@ ul {
   
   .player-id {
     margin-top: 5px;
+  }
+
+  .player-trophies {
+    font-weight: bold;
+    color: black;
   }
   
   

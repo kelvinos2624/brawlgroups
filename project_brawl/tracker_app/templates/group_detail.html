@@ -18,6 +18,7 @@
     <form action="{% url 'index' %}" method="get">
         <button type="submit">Back to Home</button>
     </form>
+    <button id="sortButton">Sort by Trophies (Highest to Lowest)</button>
     {% for player in players %}
 {% endfor %}
     <div class="card-scroll-container">
@@ -37,6 +38,68 @@
           {% endfor %}
         </div>
       </div>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
+        $(document).ready(function() {
+            var sortOrder = "highest_to_lowest";
+            var isSorting = false; // Flag to track if sorting is in progress
+    
+            $('#sortButton').click(function() {
+                // Check if sorting is already in progress
+                if (isSorting) {
+                    return; // Exit if sorting is already in progress
+                }
+                
+                // Disable the button to prevent spamming
+                $(this).prop('disabled', true);
+    
+                if (sortOrder === "highest_to_lowest") {
+                    sortPlayers("highest_to_lowest");
+                    sortOrder = "lowest_to_highest";
+                    $(this).text("Sort by Trophies (Lowest to Highest)");
+                } else {
+                    sortPlayers("lowest_to_highest");
+                    sortOrder = "highest_to_lowest";
+                    $(this).text("Sort by Trophies (Highest to Lowest)");
+                }
+            });
+    
+            function sortPlayers(sortOption) {
+                isSorting = true; // Set sorting flag to true
+                
+                var cards = $('.card');
+                var cardsArray = $.makeArray(cards);
+                cardsArray.sort(function(a, b) {
+                    var trophiesA = parseInt($(a).find('.player-trophies').text().split(':')[1].trim());
+                    var trophiesB = parseInt($(b).find('.player-trophies').text().split(':')[1].trim());
+                    if (sortOption === "highest_to_lowest") {
+                        return trophiesB - trophiesA;
+                    } else {
+                        return trophiesA - trophiesB;
+                    }
+                });
+    
+                // Animate card movements
+                $('.card-container').empty();
+                var delay = 0;
+                cardsArray.forEach(function(card, index) {
+                    $(card).slideUp(200).delay(delay).slideDown(200, function() {
+                        // Re-enable the button after animation completes
+                        if (index === cardsArray.length - 1) {
+                            $('#sortButton').prop('disabled', false);
+                            isSorting = false; // Set sorting flag to false
+                        }
+                    });
+                    delay += 100;
+                    $('.card-container').append(card);
+                });
+            }
+        });
+    </script>
+    
+    
+    
+    
       
     
 

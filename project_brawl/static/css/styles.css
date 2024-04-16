@@ -1,10 +1,10 @@
 body {
     /* Old browsers */
-    background: #141E30;
+    /*background: #141E30;
     /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(-45deg, #35577D, #141E30);
+    /*background: -webkit-linear-gradient(-45deg, #35577D, #141E30);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(-45deg, #35577D, #141E30);
+    background: #111111;
     margin: 0;
     padding: 0;
   }
@@ -28,7 +28,7 @@ body {
   }
 
   h1 {
-    color: #FFF !important;
+    color: white !important;
     font-size: 2em;
     padding-top: 50px;
     padding-bottom: 50px;
@@ -50,11 +50,11 @@ body {
   }
 
   h3 {
-    color: #FFF !important;
+    color: white !important;
   }
 
   h4 {
-    color: #FFF !important;
+    color: white !important;
   }
   
 /* Style for an unordered list */
@@ -73,7 +73,7 @@ ul {
   
 
   p {
-    color: aliceblue;
+    color: white;
     line-height: 1.3em;
     text-align: center;
     width: 100%;
@@ -138,6 +138,7 @@ ul {
     margin-bottom: 25px;
     padding: 25px;
     border-radius: 20px;
+    background-color: #333333;
   }
   
   .player-name {

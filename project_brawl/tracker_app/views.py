@@ -61,6 +61,8 @@ def group_detail(request, group_id):
         response = (authenticate(player.player_id))
         player.tilted_stats = find_tilted_brawlers(response)
         player.total_trophies = get_total_trophies(response)
+    players = sorted(players, key=lambda x: x.total_trophies, reverse=True)
+
     return render(request, 'group_detail.html', {'group_id': group_id, 'group': group, 'players': players})
 
 def authenticate(player):

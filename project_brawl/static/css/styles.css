@@ -122,6 +122,38 @@ ul {
     height: 300px;
   }
   
+  .leaderboard {
+    flex: 0 0 auto; /* Let the cards shrink and grow as needed */
+    width: 300px; /* Set a fixed width for each card */
+    max-height: 100px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    margin-right: 20px; /* Add spacing between cards */
+    margin-left: 10px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 25px;
+    border-radius: 20px;
+    background: linear-gradient(-45deg, #333333, #555555);
+  }
+
+  .player-info {
+    display: flex; /* Use flexbox to arrange player info horizontally */
+    align-items: center; /* Align items vertically within the player info */
+    justify-content: space-between; /* Space elements evenly along the main axis */
+    margin-bottom: 10px; /* Add margin between player info items */
+  }
+  
+  .player-name {
+    /* Add any desired styling for the player name */
+    color: white !important;
+  }
+  
+  .trophy-count {
+    /* Add any desired styling for the trophy count */
+    color: white !important;
+  }
+
   .card-scroll-container {
     overflow-x: auto; /* Enable horizontal scrolling */
     white-space: nowrap; /* Prevent cards from wrapping */

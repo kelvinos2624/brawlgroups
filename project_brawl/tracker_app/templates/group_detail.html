@@ -16,7 +16,7 @@
     <form action="{% url 'index' %}" method="get">
         <button type="submit">Back to Home</button>
     </form>
-    
+
     <div class="card-scroll-container-small">
       <div class="card-container-small">
         {% for player in players %}
@@ -28,7 +28,21 @@
       </div>
     </div>
 
-    <button id="sortButton">Sort by Trophies (Highest to Lowest)</button>
+    <div class="leaderboard">
+      <div class="player-info">
+        <div class="player-name">Player</div>
+        <div class="trophy-count">Total Trophies</div>
+      </div>
+      {% for player in players %}
+        <div class="player-info">
+          <div class="player-name">{{ player }}</div>
+          <div class="trophy-count">{{ player.total_trophies }}</div>
+        </div>
+      {% endfor %}
+    </div>
+    
+
+    <button id="sortButton">Sort by Trophies</button>
     <div class="card-scroll-container">
         <div class="card-container">
           {% for player in players %}
@@ -67,11 +81,9 @@
                 if (sortOrder === "highest_to_lowest") {
                     sortPlayers("highest_to_lowest");
                     sortOrder = "lowest_to_highest";
-                    $(this).text("Sort by Trophies (Lowest to Highest)");
                 } else {
                     sortPlayers("lowest_to_highest");
                     sortOrder = "highest_to_lowest";
-                    $(this).text("Sort by Trophies (Highest to Lowest)");
                 }
             });
     

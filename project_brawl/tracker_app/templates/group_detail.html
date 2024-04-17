@@ -7,6 +7,7 @@
     <title>Group Details</title>
     <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
     <link rel="icon" href="{% static 'sakura_spike.webp' %}" type="image/webp">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <h1>Group Details: {{ group.name }}</h1>
@@ -41,6 +42,43 @@
       {% endfor %}
     </div>
     
+    <div class="brawler-icon-scroll-container">
+      <div class="brawler-icon-container">
+        {% for brawler in brawlers %}
+          <div class="brawler-icon" data-brawler="{{ brawler }}">
+            <h4>{{ brawler }}</h4>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    
+    <div id="brawler-info" style="display: none;">
+      <!-- Information about the selected brawler will be displayed here -->
+    </div>
+    
+    <script>
+      $(document).ready(function() {
+        var selectedBrawler = ''; // Variable to store the currently selected brawler
+        
+        $('.brawler-icon-container').on('click', '.brawler-icon', function() {
+          var brawlerName = $(this).find('h4').text(); // Get the text content of the clicked brawler icon
+          
+          // Toggle the visibility of the brawler-info div based on whether the clicked brawler is the same as the currently selected one
+          if (selectedBrawler === brawlerName) {
+            $('#brawler-info').slideUp(200); // Slide up animation to hide the brawler-info div
+            selectedBrawler = ''; // Reset the selected brawler
+          } else {
+            $('#brawler-info').slideUp(200, function() {
+              // Slide up animation to hide the brawler-info div, then update its content and slide down to reveal it
+              $(this).text('Selected Brawler: ' + brawlerName).slideDown(200);
+            });
+            selectedBrawler = brawlerName; // Update the selected brawler
+          }
+        });
+      });
+    </script>
+    
+    
 
     <button id="sortButton">Sort by Trophies</button>
     <div class="card-scroll-container">
@@ -63,9 +101,9 @@
       <form action="{% url 'index' %}" method="get">
         <button type="submit">Back to Home</button>
     </form>
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script>
         $(document).ready(function() {
+            console.log("sort")
             var sortOrder = "highest_to_lowest";
             var isSorting = false; // Flag to track if sorting is in progress
     

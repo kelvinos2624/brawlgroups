@@ -201,6 +201,30 @@ ul {
     border-radius: 20px;
     background: linear-gradient(-45deg, #333333, #555555);
   }
+
+  .brawler-icon-scroll-container {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .brawler-icon-container {
+    display: inline-flex;
+  }
+
+  .brawler-icon {
+    flex: 0 0 auto; /* Let the cards shrink and grow as needed */
+    width: 100px; /* Set a fixed width for each card */
+    height: 100px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    margin-right: 5px; /* Add spacing between cards */
+    margin-left: 5px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 25px;
+    border-radius: 20px;
+    background: linear-gradient(-45deg, #333333, #555555);
+  }
   
   .player-name {
     font-weight: bold;
@@ -223,4 +247,10 @@ ul {
     box-shadow: 5px 0px 5px 0px rgba(0, 0, 50, 0.97);
     float: left;
     width: 50px;
+  }
+
+  #brawler-info {
+    background-color: #333333;
+    color: #FFFFFF;
+    height: 500px;
   }

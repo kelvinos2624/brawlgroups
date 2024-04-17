@@ -62,8 +62,12 @@ def group_detail(request, group_id):
         player.tilted_stats = find_tilted_brawlers(response)
         player.total_trophies = get_total_trophies(response)
     players = sorted(players, key=lambda x: x.total_trophies, reverse=True)
+    brawler_response = get_brawlers_info()
+    brawlers = []
+    for brawler in brawler_response.json()["items"]:
+        brawlers.append(brawler["name"])
 
-    return render(request, 'group_detail.html', {'group_id': group_id, 'group': group, 'players': players})
+    return render(request, 'group_detail.html', {'group_id': group_id, 'group': group, 'players': players, 'brawlers': brawlers})
 
 def authenticate(player):
     url = f"https://api.brawlstars.com/v1/players/%23{player}"
@@ -72,6 +76,13 @@ def authenticate(player):
     }
     response = requests.get(url, headers=headers)
     return response
+
+def get_brawlers_info():
+    url = "https://api.brawlstars.com/v1/brawlers"
+    headers = {
+        "Authorization": "Bearer " + os.getenv("API_KEY")
+    }
+    return requests.get(url, headers=headers)
 
 def find_tilted_brawlers(response):
     tilt = {}

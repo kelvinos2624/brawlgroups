@@ -9,18 +9,26 @@
     <link rel="icon" href="{% static 'sakura_spike.webp' %}" type="image/webp">
 </head>
 <body>
-    <h1>Group Details</h1>
-    <h2>{{ group.name }}</h2>
-
+    <h1>Group Details: {{ group.name }}</h1>
     <form action="{% url 'add_player' group_id=group.id %}">
         <button type="submit">Add Player</button>
     </form>
     <form action="{% url 'index' %}" method="get">
         <button type="submit">Back to Home</button>
     </form>
+    
+    <div class="card-scroll-container-small">
+      <div class="card-container-small">
+        {% for player in players %}
+          <div class="card-small">
+              <h4>{{ player }}</h4>
+              <h4>Total Trophies: {{ player.total_trophies }}</h4>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
     <button id="sortButton">Sort by Trophies (Highest to Lowest)</button>
-    {% for player in players %}
-{% endfor %}
     <div class="card-scroll-container">
         <div class="card-container">
           {% for player in players %}
@@ -38,6 +46,9 @@
           {% endfor %}
         </div>
       </div>
+      <form action="{% url 'index' %}" method="get">
+        <button type="submit">Back to Home</button>
+    </form>
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script>
         $(document).ready(function() {
@@ -90,7 +101,7 @@
                             isSorting = false; // Set sorting flag to false
                         }
                     });
-                    delay += 100;
+                    //delay += 100;
                     $('.card-container').append(card);
                 });
             }

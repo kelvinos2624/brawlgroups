@@ -57,13 +57,11 @@ def edit_group_name(request, group_id):
 def group_detail(request, group_id):
     group = Group.objects.get(pk=group_id)
     players = group.players.all()
-
     for player in players:
-        player.tilted_stats = find_tilted_brawlers(authenticate(player.player_id))
-        player.total_trophies = get_total_trophies(authenticate(player.player_id))
+        response = (authenticate(player.player_id))
+        player.tilted_stats = find_tilted_brawlers(response)
+        player.total_trophies = get_total_trophies(response)
     return render(request, 'group_detail.html', {'group_id': group_id, 'group': group, 'players': players})
-
-
 
 def authenticate(player):
     url = f"https://api.brawlstars.com/v1/players/%23{player}"

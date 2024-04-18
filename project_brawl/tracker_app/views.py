@@ -4,6 +4,7 @@ from .forms import Group_Form, Player_Form
 from .models import Group, Player
 import requests
 import os
+import json
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -54,20 +55,32 @@ def edit_group_name(request, group_id):
         return redirect('group_detail', group_id=group_id)
     return render(request, 'edit_group_name.html', {'group': group})
 
+import json
+
 def group_detail(request, group_id):
     group = Group.objects.get(pk=group_id)
     players = group.players.all()
     for player in players:
-        response = (authenticate(player.player_id))
+        response = authenticate(player.player_id)
         player.tilted_stats = find_tilted_brawlers(response)
         player.total_trophies = get_total_trophies(response)
+        player.brawler_trophies = get_brawler_trophies(response)
     players = sorted(players, key=lambda x: x.total_trophies, reverse=True)
     brawler_response = get_brawlers_info()
-    brawlers = []
-    for brawler in brawler_response.json()["items"]:
-        brawlers.append(brawler["name"])
-
-    return render(request, 'group_detail.html', {'group_id': group_id, 'group': group, 'players': players, 'brawlers': brawlers})
+    brawlers = [brawler["name"] for brawler in brawler_response.json()["items"]]
+    
+    # Serialize only the brawler_trophies attribute of players to JSON format
+    brawler_trophies_json = json.dumps({
+        player.brawl_name: player.brawler_trophies for player in players
+    })
+    
+    return render(request, 'group_detail.html', {
+        'group_id': group_id,
+        'group': group,
+        'players': players,
+        'brawler_trophies': brawler_trophies_json,  # Pass the serialized brawler_trophies data
+        'brawlers': brawlers
+    })
 
 def authenticate(player):
     url = f"https://api.brawlstars.com/v1/players/%23{player}"
@@ -92,6 +105,12 @@ def find_tilted_brawlers(response):
 
 def get_total_trophies(response):
     return response.json()["trophies"]
+
+def get_brawler_trophies(response):
+    brawler_trophies = {}
+    for entity in response.json()["brawlers"]:
+        brawler_trophies[entity["name"]] = entity["trophies"]
+    return brawler_trophies
 
 def menu(request):
     try:

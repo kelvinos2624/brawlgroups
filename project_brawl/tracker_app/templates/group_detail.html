@@ -45,8 +45,8 @@
     <div class="brawler-icon-scroll-container">
       <div class="brawler-icon-container">
         {% for brawler in brawlers %}
-          <div class="brawler-icon" data-brawler="{{ brawler }}">
-            <h4>{{ brawler }}</h4>
+          <div class="brawler-icon" data-brawler="{{ brawler }}" style="background-image: url('{% static 'brawler_icons/' %}{{ brawler }}-icon.png');">
+          <h4 style="display: none;">{{ brawler }}</h4>
           </div>
         {% endfor %}
       </div>
@@ -54,6 +54,7 @@
     
     <div id="brawler-info" style="display: none;">
       <!-- Information about the selected brawler will be displayed here -->
+      <h3>Selected Brawler: <span id="selected-brawler-name"></span></h3>
     </div>
     
     <script>
@@ -61,7 +62,7 @@
         var selectedBrawler = ''; // Variable to store the currently selected brawler
         
         $('.brawler-icon-container').on('click', '.brawler-icon', function() {
-          var brawlerName = $(this).find('h4').text(); // Get the text content of the clicked brawler icon
+          var brawlerName = $(this).data('brawler'); // Get the text content of the clicked brawler icon
           
           // Toggle the visibility of the brawler-info div based on whether the clicked brawler is the same as the currently selected one
           if (selectedBrawler === brawlerName) {
@@ -70,7 +71,10 @@
           } else {
             $('#brawler-info').slideUp(200, function() {
               // Slide up animation to hide the brawler-info div, then update its content and slide down to reveal it
-              $(this).text('Selected Brawler: ' + brawlerName).slideDown(200);
+              $("#brawler-info").slideDown(200);
+              $("#selected-brawler-name").text(brawlerName)
+
+              //$('selected-brawler-name').text(brawlerName).slideDown(200);
             });
             selectedBrawler = brawlerName; // Update the selected brawler
           }

@@ -4,7 +4,7 @@ body {
     /* Chrome 10-25, Safari 5.1-6 */
     /*background: -webkit-linear-gradient(-45deg, #35577D, #141E30);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: #111111;
+    background: #17171C;
     margin: 0;
     padding: 0;
   }
@@ -130,11 +130,14 @@ ul {
     border: 1px solid #ccc;
     margin-right: 20px; /* Add spacing between cards */
     margin-left: 10px;
-    margin-top: 25px;
-    margin-bottom: 25px;
+    margin-top: 75px;
+    margin-bottom: -75px;
     padding: 25px;
     border-radius: 20px;
     background: linear-gradient(-45deg, #333333, #555555);
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .player-info {
@@ -176,6 +179,7 @@ ul {
     padding: 25px;
     border-radius: 20px;
     background: linear-gradient(-45deg, #333333, #555555);
+    
   }
 
   .card-scroll-container-small {
@@ -215,15 +219,22 @@ ul {
     flex: 0 0 auto; /* Let the cards shrink and grow as needed */
     width: 100px; /* Set a fixed width for each card */
     height: 100px;
-    overflow-y: auto;
     border: 1px solid #ccc;
     margin-right: 5px; /* Add spacing between cards */
     margin-left: 5px;
     margin-top: 25px;
     margin-bottom: 25px;
+    border-radius: 10px;
     padding: 25px;
-    border-radius: 20px;
-    background: linear-gradient(-45deg, #333333, #555555);
+    background-image: url('sakura_spike.webp');
+    background-size: cover;
+    background-position: center;
+    transition: background-size 0.3s ease;
+    background-size: 120%;
+  }
+
+  .brawler-icon:hover {
+    transform: scale(1.1); /* Zoom in by 10% when hovering over the icon */
   }
   
   .player-name {
@@ -253,4 +264,6 @@ ul {
     background-color: #333333;
     color: #FFFFFF;
     height: 500px;
+    overflow-y: hidden;
+    border-radius: 10px;
   }

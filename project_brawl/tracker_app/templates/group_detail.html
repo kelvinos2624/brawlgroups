@@ -44,7 +44,7 @@
         </div>
       {% endfor %}
     </div>
-    <h2 id="selectedBrawler" display: none>Viewing: </h2>
+    <h2 id="selectedBrawler" display: none>SELECT A BRAWLER</h2>
 
     
     <div class="brawler-icon-scroll-container">
@@ -58,46 +58,23 @@
     </div>
     <div id="brawler-info" style="display: none;">
       <!-- Information about the selected brawler will be displayed here -->
-      <h3>Selected Brawler: <span id="selected-brawler-name"></span></h3>
-      {% for player in players %}
+      <div class="leaderboard" style="left: -0.6%; height: 448px; transform: translate(0%, -15%); border-radius: 10px;">
+        <h3>Selected Brawler: <span id="selected-brawler-name"></span></h3>
+        {% for player in players %}
       <div class="player-info">
           <div class="player-name">{{ player }}</div>
           <div class="trophy-count" id="trophy-count-{{ player.brawl_name }}"></div>
       </div>
       {% endfor %}
+      </div>
+  </div>
+
+  <div class="fun-fact">
+    <h2 style="border-top: none; margin-top: -10px">FUN FACT:</h2>
   </div>
   
-    <script>
-      $(document).ready(function() {
-        var selectedBrawler = ''; // Variable to store the currently selected brawler
-        
-        $('.brawler-icon-container').on('click', '.brawler-icon', function() {
-          var brawlerName = $(this).data('brawler'); // Get the text content of the clicked brawler icon
-          document.getElementById("selectedBrawler").innerHTML = brawlerName;
-          // Toggle the visibility of the brawler-info div based on whether the clicked brawler is the same as the currently selected one
-          if (selectedBrawler === brawlerName) {
-            $('#brawler-info').slideUp(200); // Slide up animation to hide the brawler-info div
-            selectedBrawler = ''; // Reset the selected brawler
-          } else {
-            $('#brawler-info').slideUp(200, function() {
-              // Slide up animation to hide the brawler-info div, then update its content and slide down to reveal it
-              $("#brawler-info").slideDown(200);
-              $("#selected-brawler-name").text(brawlerName)
-              //$('selected-brawler-name').text(brawlerName).slideDown(200);
-            });
-            selectedBrawler = brawlerName; // Update the selected brawler
-          }
-          var selectedBrawlerName = document.getElementById("selected-brawler-name").textContent;
-          var brawlerTrophies = JSON.parse('{{ brawler_trophies | safe }}'); // Convert players data to JavaScript object
   
-          // Iterate over each player to update trophy count
-          for (const [player, trophies] of Object.entries(brawlerTrophies)) {
-            var trophyCountElement = document.getElementById("trophy-count-" + player);
-            trophyCountElement.textContent = brawlerTrophies[player][selectedBrawler];
-          }
-        });
-      });
-    </script>
+    
     
     
 
@@ -122,6 +99,68 @@
       <form action="{% url 'index' %}" method="get">
         <button type="submit">Back to Home</button>
     </form>
+
+    <script>
+      $(document).ready(function() {
+        var selectedBrawler = ''; // Variable to store the currently selected brawler
+        
+        $('.brawler-icon-container').on('click', '.brawler-icon', function() {
+          var brawlerName = $(this).data('brawler'); // Get the text content of the clicked brawler icon
+          // Toggle the visibility of the brawler-info div based on whether the clicked brawler is the same as the currently selected one
+          document.getElementById("selectedBrawler").innerHTML = brawlerName;
+          if (selectedBrawler === brawlerName) {
+            $('#brawler-info').slideUp(200); // Slide up animation to hide the brawler-info div
+            selectedBrawler = ''; // Reset the selected brawler
+            $("#selectedBrawler").text("SELECT A BRAWLER");
+          } else {
+            $('#brawler-info').slideUp(200, function() {
+              selectedBrawler = brawlerName;
+              // Slide up animation to hide the brawler-info div, then update its content and slide down to reveal it
+              $("#brawler-info").slideDown(200);
+              $("#selected-brawler-name").text(brawlerName);
+              var selectedBrawlerName = document.getElementById("selected-brawler-name").textContent;
+              var brawlerTrophies = JSON.parse('{{ brawler_trophies | safe }}'); // Convert players data to JavaScript object
+  
+          // Iterate over each player to update trophy count
+              for (const [player, trophies] of Object.entries(brawlerTrophies)) {
+                var trophyCountElement = document.getElementById("trophy-count-" + player);
+                trophyCountElement.textContent = brawlerTrophies[player][selectedBrawler];
+              }
+            });
+            selectedBrawler = brawlerName; // Update the selected brawler
+          }
+          
+        });
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+  const container = document.querySelector(".brawler-icon-scroll-container");
+
+  // Add click event listener to each icon
+  const icons = document.querySelectorAll(".brawler-icon");
+  icons.forEach(icon => {
+    icon.addEventListener("click", function() {
+      centerIconHorizontally(icon);
+    });
+  });
+
+  // Function to center the clicked icon horizontally within its container
+  function centerIconHorizontally(icon) {
+    const containerRect = container.getBoundingClientRect();
+    const iconRect = icon.getBoundingClientRect();
+
+    // Calculate the scroll position needed to center the icon
+    const scrollLeft = iconRect.left - containerRect.left - (containerRect.width - iconRect.width) / 2;
+
+    // Scroll the container to the calculated position
+    container.scrollBy({
+      left: scrollLeft,
+      behavior: "smooth"
+    });
+  }
+});
+    </script>
       <script>
         $(document).ready(function() {
             console.log("sort")

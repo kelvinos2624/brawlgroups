@@ -125,7 +125,7 @@ ul {
   .leaderboard {
     flex: 0 0 auto; /* Let the cards shrink and grow as needed */
     width: 300px; /* Set a fixed width for each card */
-    max-height: 100px;
+    height: 100px;
     overflow-y: auto;
     border: 1px solid #ccc;
     margin-right: 20px; /* Add spacing between cards */
@@ -208,30 +208,32 @@ ul {
 
   .brawler-icon-scroll-container {
     overflow-x: auto;
-    white-space: nowrap;
-  }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Distribute items evenly with extra space */
+}
 
-  .brawler-icon-container {
+.brawler-icon-container {
     display: inline-flex;
-  }
+}
 
-  .brawler-icon {
-    flex: 0 0 auto; /* Let the cards shrink and grow as needed */
-    width: 100px; /* Set a fixed width for each card */
+.brawler-icon {
+    flex: 0 0 auto;
+    width: 100px;
     height: 100px;
     border: 1px solid #ccc;
-    margin-right: 5px; /* Add spacing between cards */
+    margin-right: 5px;
     margin-left: 5px;
     margin-top: 25px;
     margin-bottom: 25px;
     border-radius: 10px;
     padding: 25px;
-    background-image: url('sakura_spike.webp');
     background-size: cover;
     background-position: center;
     transition: background-size 0.3s ease;
     background-size: 120%;
-  }
+}
+
 
   .brawler-icon:hover {
     transform: scale(1.1); /* Zoom in by 10% when hovering over the icon */
@@ -264,6 +266,15 @@ ul {
     background-color: #333333;
     color: #FFFFFF;
     height: 500px;
+    overflow-y: hidden;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+
+  .fun-fact {
+    background-color: #333333;
+    color: #FFFFFF;
+    height: 200px;
     overflow-y: hidden;
     border-radius: 10px;
   }

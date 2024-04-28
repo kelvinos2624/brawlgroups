@@ -157,6 +157,41 @@ ul {
     color: white !important;
   }
 
+  .player-scroll-container {
+    flex: 1;
+    overflow-y: auto;
+    white-space: wrap;
+    max-height: 500px;
+    max-width: 292px;
+    background-color: #333333;
+  }
+
+  .player-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .player-card {
+    flex: 0 0 auto;
+    width: 250px;
+    height: 60px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    padding: 10px;
+    margin: 10px;
+    background-size: cover;
+    background-position: center;
+    transition: background-size 0.3s ease;
+    background-size: 120%;
+    border-radius: 1px;
+    box-shadow: 4px 4px 8px rgba(128, 128, 128, .75);
+  }
+
+  .player-card:hover {
+    transform: scale(1.05);
+    box-shadow: 4px 4px 8px rgba(255, 255, 255, 1);
+  }
+
   .card-scroll-container {
     overflow-x: auto; /* Enable horizontal scrolling */
     white-space: nowrap; /* Prevent cards from wrapping */
@@ -179,7 +214,6 @@ ul {
     padding: 25px;
     border-radius: 20px;
     background: linear-gradient(-45deg, #333333, #555555);
-    
   }
 
   .card-scroll-container-small {
@@ -232,11 +266,13 @@ ul {
     background-position: center;
     transition: background-size 0.3s ease;
     background-size: 120%;
+    box-shadow: 4px 4px 8px rgba(128, 128, 128, .75);
+
 }
 
-
   .brawler-icon:hover {
-    transform: scale(1.1); /* Zoom in by 10% when hovering over the icon */
+    transform: scale(1.1);
+    box-shadow: 4px 4px 8px rgba(255, 255, 255, 1);
   }
   
   .player-name {
@@ -252,7 +288,10 @@ ul {
     color: black;
   }
   
-  
+  .horizontal-container {
+    display: flex;
+    align-items: flex-start;
+  }
 
   .writer-img {
     -webkit-box-shadow: 5px 0px 5px 0px rgba(0, 0, 50, 0.97);
@@ -277,4 +316,12 @@ ul {
     height: 200px;
     overflow-y: hidden;
     border-radius: 10px;
+  }
+  #player-stats {
+    flex: 1;
+    background-color: #555555; /* Example background color */
+    padding: 20px; /* Example padding */
+    white-space: wrap;
+    height: 500px;
+    overflow-y: auto;
   }

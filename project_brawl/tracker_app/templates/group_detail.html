@@ -17,34 +17,68 @@
     <form action="{% url 'index' %}" method="get">
         <button type="submit">Back to Home</button>
     </form>
-
-    <div class="card-scroll-container-small">
-      <div class="card-container-small">
+    
+    <div id="selectedPlayers">
+      <h2>LEADERBOARD</h2>
+    </div>
+    <div id="horizontal-container" class="horizontal-container">
+      <div class="player-scroll-container">
         {% for player in players %}
-          <div class="card-small">
-              <h4>{{ player }}</h4>
-              <h4>Total Trophies: {{ player.total_trophies }}</h4>
+        <div class="player-card">
+          <div class="player-container">
+            <h4>{{ player }}</h4>
+            <h4>{{ player.total_trophies }}</h4>
           </div>
+        </div>
         {% endfor %}
       </div>
-    </div>
-
-    <div class="leaderboard">
-      <div class="player-info">
-        <div class="player-name">Player</div>
-        <div class="trophy-count">Total Trophies</div>
+      <div id="player-stats">
+        <h2>SELECT A PLAYER</h2>
+        <div id="player-trophies"></div> <!-- Changed to div to hold trophy information -->
       </div>
-
-
-
-      {% for player in players %}
-        <div class="player-info">
-          <div class="player-name">{{ player }}</div>
-          <div class="trophy-count">{{ player.total_trophies }}</div>
-        </div>
-      {% endfor %}
     </div>
+    
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get all player card elements
+        const playerCards = document.querySelectorAll(".player-card");
+    
+        // Add click event listener to each player card
+        playerCards.forEach(function (card) {
+          card.addEventListener("click", function () {
+            // Get the player name from the clicked card
+            const playerName = card.querySelector("h4:first-child").textContent;
+    
+            // Update the player-stats header with the player name
+            const playerStatsHeader = document.querySelector("#player-stats h2");
+            playerStatsHeader.textContent = playerName;
+    
+            // Clear previous trophy information
+            document.getElementById('player-trophies').innerHTML = '';
+    
+            // Assuming you have a selected player name stored in a variable
+            const selectedPlayer = playerName;
+    
+            // Assuming you have a JavaScript object containing player brawler trophies
+            const brawlerTrophies = JSON.parse('{{ brawler_trophies | safe }}');
+    
+            // Iterate over each brawler in brawlerTrophies for the selected player
+            for (const [brawler, trophies] of Object.entries(brawlerTrophies[selectedPlayer])) {
+              // Create a new element to display the trophy count for each brawler
+              const trophyElement = document.createElement('div');
+              trophyElement.textContent = `${brawler}: ${trophies}`;
+    
+              // Append the trophy count element to the player-trophies div
+              document.getElementById('player-trophies').appendChild(trophyElement);
+            }
+          });
+        });
+      });
+    </script>
+    
+    
     <h2 id="selectedBrawler" display: none>SELECT A BRAWLER</h2>
+    
 
     
     <div class="brawler-icon-scroll-container">
@@ -72,11 +106,6 @@
   <div class="fun-fact">
     <h2 style="border-top: none; margin-top: -10px">FUN FACT:</h2>
   </div>
-  
-  
-    
-    
-    
 
     <button id="sortButton">Sort by Trophies</button>
     <div class="card-scroll-container">
@@ -99,6 +128,8 @@
       <form action="{% url 'index' %}" method="get">
         <button type="submit">Back to Home</button>
     </form>
+
+
 
     <script>
       $(document).ready(function() {

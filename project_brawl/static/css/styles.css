@@ -324,4 +324,18 @@ ul {
     white-space: wrap;
     height: 500px;
     overflow-y: auto;
+    margin-left: 20px;
+    margin-right: 20px;
+    transition: opacity 0.5s, transform 0.5s;
+  }
+
+  #player-stats:not(.hidden) {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .hidden {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 0.5s, transform 0.5s;
   }

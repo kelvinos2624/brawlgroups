@@ -32,49 +32,74 @@
         </div>
         {% endfor %}
       </div>
-      <div id="player-stats">
-        <h2>SELECT A PLAYER</h2>
-        <div id="player-trophies"></div> <!-- Changed to div to hold trophy information -->
+      <div id="player-stats" class="hidden">
+        <h2>SELECTED PLAYER</h2>
+        <div id="player-trophies"></div>
       </div>
     </div>
     
+    <style>
+      .hidden {
+        display: none;
+      }
+    
+      #player-stats {
+        display: none;
+      }
+    
+      .slide-in {
+        animation: slideIn 0.5s forwards;
+      }
+    
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+    </style>
+    
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Get all player card elements
         const playerCards = document.querySelectorAll(".player-card");
+        const playerStats = document.getElementById("player-stats");
     
-        // Add click event listener to each player card
         playerCards.forEach(function (card) {
           card.addEventListener("click", function () {
-            // Get the player name from the clicked card
             const playerName = card.querySelector("h4:first-child").textContent;
-    
-            // Update the player-stats header with the player name
             const playerStatsHeader = document.querySelector("#player-stats h2");
             playerStatsHeader.textContent = playerName;
     
             // Clear previous trophy information
             document.getElementById('player-trophies').innerHTML = '';
     
-            // Assuming you have a selected player name stored in a variable
             const selectedPlayer = playerName;
-    
-            // Assuming you have a JavaScript object containing player brawler trophies
             const brawlerTrophies = JSON.parse('{{ brawler_trophies | safe }}');
     
-            // Iterate over each brawler in brawlerTrophies for the selected player
             for (const [brawler, trophies] of Object.entries(brawlerTrophies[selectedPlayer])) {
-              // Create a new element to display the trophy count for each brawler
               const trophyElement = document.createElement('div');
               trophyElement.textContent = `${brawler}: ${trophies}`;
-    
-              // Append the trophy count element to the player-trophies div
               document.getElementById('player-trophies').appendChild(trophyElement);
             }
+    
+            // Remove and re-add animation class to reset animation
+            playerStats.classList.remove("slide-in");
+            void playerStats.offsetWidth; // Trigger reflow
+            playerStats.classList.add("slide-in");
+    
+            // Show player-stats
+            playerStats.style.display = "block";
           });
         });
       });
     </script>
+    
+    
+    
     
     
     <h2 id="selectedBrawler" display: none>SELECT A BRAWLER</h2>

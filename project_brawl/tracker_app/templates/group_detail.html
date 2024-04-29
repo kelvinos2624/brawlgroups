@@ -34,7 +34,11 @@
       </div>
       <div id="player-stats" class="hidden">
         <h2>SELECTED PLAYER</h2>
-        <div id="player-trophies"></div>
+        <div class="card">
+          <h2>Brawler Trophies</h2>
+        <h4 id="player-trophies" class="player-trophies">
+        </h4>
+        </div>
       </div>
     </div>
     
@@ -67,6 +71,7 @@
       document.addEventListener("DOMContentLoaded", function () {
         const playerCards = document.querySelectorAll(".player-card");
         const playerStats = document.getElementById("player-stats");
+        const playerTrophiesContainer = document.getElementById("player-trophies");
     
         playerCards.forEach(function (card) {
           card.addEventListener("click", function () {
@@ -77,14 +82,28 @@
             // Clear previous trophy information
             document.getElementById('player-trophies').innerHTML = '';
     
+            playerTrophiesContainer.innerHTML = '';
             const selectedPlayer = playerName;
             const brawlerTrophies = JSON.parse('{{ brawler_trophies | safe }}');
     
             for (const [brawler, trophies] of Object.entries(brawlerTrophies[selectedPlayer])) {
               const trophyElement = document.createElement('div');
-              trophyElement.textContent = `${brawler}: ${trophies}`;
-              document.getElementById('player-trophies').appendChild(trophyElement);
-            }
+              trophyElement.style.backgroundImage = `url('/static/brawler_icons/${brawler}-icon.png')`;
+              trophyElement.classList.add('brawl-icon-personal');
+              
+              // Create a span element for the text content
+              const textElement = document.createElement('span');
+              textElement.textContent = `${brawler}: ${trophies}`;
+              
+              // Add a class to the text element for highlighting
+              textElement.classList.add('highlight-text');
+
+              // Append the text element to the trophyElement
+              trophyElement.appendChild(textElement);
+
+              playerTrophiesContainer.appendChild(trophyElement);
+          }
+
     
             // Remove and re-add animation class to reset animation
             playerStats.classList.remove("slide-in");

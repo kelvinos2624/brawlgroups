@@ -267,9 +267,28 @@ ul {
     transition: background-size 0.3s ease;
     background-size: 120%;
     box-shadow: 4px 4px 8px rgba(128, 128, 128, .75);
-
 }
 
+.brawl-icon-personal {
+  width: 125px;
+  height: 125px;
+  border: 1px solid #ccc;
+  margin: 1px; /* Adjust as needed */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background-size: cover;
+  flex-direction: column;
+}
+.brawl-icon-personal h4 {
+  margin-top: auto; /* Push the text to the bottom */
+}
+
+.highlight-text {
+  background-color: white;
+  color: black;
+  padding: 2px; /* Adjust padding as needed */
+}
   .brawler-icon:hover {
     transform: scale(1.1);
     box-shadow: 4px 4px 8px rgba(255, 255, 255, 1);
@@ -284,10 +303,11 @@ ul {
   }
 
   .player-trophies {
-    font-weight: bold;
-    color: black;
-  }
-  
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    gap: 5px; /* Adjust spacing between trophies */
+}
+
   .horizontal-container {
     display: flex;
     align-items: flex-start;
@@ -322,7 +342,7 @@ ul {
     background-color: #555555; /* Example background color */
     padding: 20px; /* Example padding */
     white-space: wrap;
-    height: 500px;
+    height: 700px;
     overflow-y: auto;
     margin-left: 20px;
     margin-right: 20px;

@@ -64,11 +64,16 @@ def group_detail(request, group_id):
         response = authenticate(player.player_id)
         player.tilted_stats = find_tilted_brawlers(response)
         player.total_trophies = get_total_trophies(response)
+        player.solo_victories = get_solo_victories(response)
+        player.duo_victories = get_duo_victories(response)
+        player.three_victories = get_3v3_victories(response)
         player.brawler_trophies = get_brawler_trophies(response)
+        player.recent_win_rate = get_win_rate(response)
+
     players = sorted(players, key=lambda x: x.total_trophies, reverse=True)
     brawler_response = get_brawlers_info()
     brawlers = [brawler["name"] for brawler in brawler_response.json()["items"]]
-    
+
     # Serialize only the brawler_trophies attribute of players to JSON format
     brawler_trophies_json = json.dumps({
         player.brawl_name: player.brawler_trophies for player in players
@@ -79,8 +84,20 @@ def group_detail(request, group_id):
         'group': group,
         'players': players,
         'brawler_trophies': brawler_trophies_json,  # Pass the serialized brawler_trophies data
-        'brawlers': brawlers
+        'brawlers': brawlers,
     })
+
+def get_solo_victories(response):
+    return response.json()["soloVictories"]
+
+def get_duo_victories(response):
+    return response.json()["duoVictories"]
+
+def get_3v3_victories(response):
+    return response.json()["3vs3Victories"]
+
+def get_win_rate(response):
+    pass
 
 def authenticate(player):
     url = f"https://api.brawlstars.com/v1/players/%23{player}"

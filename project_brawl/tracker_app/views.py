@@ -69,6 +69,7 @@ def group_detail(request, group_id):
         player.threes_victories = get_3v3_victories(response)
         player.brawler_trophies = get_brawler_trophies(response)
         player.recent_win_rate = get_win_rate(player.player_id)
+        player.highest_trophies = get_highest_trophies(response)
 
     players = sorted(players, key=lambda x: x.total_trophies, reverse=True)
     brawler_response = get_brawlers_info()
@@ -86,6 +87,7 @@ def group_detail(request, group_id):
             'duo_victories': player.duo_victories,
             'threes_victories': player.threes_victories,
             'recent_win_rate': player.recent_win_rate,
+            'highest_trophies': player.highest_trophies
         } for player in players
     })
 
@@ -97,6 +99,9 @@ def group_detail(request, group_id):
         'brawlers': brawlers,
         'player_info': player_info_json,
     })
+
+def get_highest_trophies(response):
+    return response.json()["highestTrophies"]
 
 def get_solo_victories(response):
     return response.json()["soloVictories"]
@@ -124,9 +129,9 @@ def get_win_rate(player):
                 victory_counter += 1
             else:
                 loss_counter += 1
+            
     win_rate = (victory_counter / (victory_counter + loss_counter)) * 100
     return f"{win_rate:.2f}%"
-    
 
 def authenticate(player):
     url = f"https://api.brawlstars.com/v1/players/%23{player}"

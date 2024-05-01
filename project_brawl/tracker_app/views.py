@@ -68,7 +68,7 @@ def group_detail(request, group_id):
         player.duo_victories = get_duo_victories(response)
         player.threes_victories = get_3v3_victories(response)
         player.brawler_trophies = get_brawler_trophies(response)
-        player.recent_win_rate = get_win_rate(response)
+        player.recent_win_rate = get_win_rate(player.player_id)
 
     players = sorted(players, key=lambda x: x.total_trophies, reverse=True)
     brawler_response = get_brawlers_info()
@@ -85,10 +85,9 @@ def group_detail(request, group_id):
             'solo_victories': player.solo_victories,
             'duo_victories': player.duo_victories,
             'threes_victories': player.threes_victories,
+            'recent_win_rate': player.recent_win_rate,
         } for player in players
     })
-
-    
 
     return render(request, 'group_detail.html', {
         'group_id': group_id,
@@ -108,8 +107,26 @@ def get_duo_victories(response):
 def get_3v3_victories(response):
     return response.json()["3vs3Victories"]
 
-def get_win_rate(response):
-    pass
+def get_win_rate(player):
+    url = f"https://api.brawlstars.com/v1/players/%23{player}/battlelog"
+    headers = {
+        "Authorization": "Bearer " + os.getenv("API_KEY")
+    }
+    response = requests.get(url, headers=headers)
+    victory_counter = 0
+    loss_counter = 0
+    valid_gamemodes = ["gemGrab", "knockout", "brawlBall", "heist", "hotZone", "bounty", "wipeout"]
+    for battle in response.json()['items']:
+        battle = battle["battle"]
+        print(battle)
+        if battle["mode"] in valid_gamemodes:
+            if battle["result"] == "victory":
+                victory_counter += 1
+            else:
+                loss_counter += 1
+    win_rate = (victory_counter / (victory_counter + loss_counter)) * 100
+    return f"{win_rate:.2f}%"
+    
 
 def authenticate(player):
     url = f"https://api.brawlstars.com/v1/players/%23{player}"

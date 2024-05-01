@@ -42,6 +42,7 @@
         <h4 id="solo-victories"></h4>
         <h4 id="duo-victories"></h4>
         <h4 id="threes-victories"></h4>
+        <h4 id="recent-win-rate"></h4>
       </div>
       
 
@@ -97,10 +98,12 @@
             const soloVictories = document.getElementById("solo-victories");
             const duoVictories = document.getElementById("duo-victories");
             const threesVictories = document.getElementById("threes-victories");
+            const recentWinRate = document.getElementById("recent-win-rate");
             totalTrophies.textContent = playerInfo[playerName]['total_trophies'];
             soloVictories.textContent = playerInfo[playerName]['solo_victories'];
             duoVictories.textContent = playerInfo[playerName]['duo_victories'];
             threesVictories.textContent = playerInfo[playerName]['threes_victories'];
+            recentWinRate.textContent = playerInfo[playerName]['recent_win_rate'];
 
             for (const [brawler, trophies] of Object.entries(brawlerTrophies[selectedPlayer])) {
               const trophyElement = document.createElement('div');

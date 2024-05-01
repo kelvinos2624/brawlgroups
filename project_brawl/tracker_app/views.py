@@ -66,7 +66,7 @@ def group_detail(request, group_id):
         player.total_trophies = get_total_trophies(response)
         player.solo_victories = get_solo_victories(response)
         player.duo_victories = get_duo_victories(response)
-        player.three_victories = get_3v3_victories(response)
+        player.threes_victories = get_3v3_victories(response)
         player.brawler_trophies = get_brawler_trophies(response)
         player.recent_win_rate = get_win_rate(response)
 
@@ -78,13 +78,25 @@ def group_detail(request, group_id):
     brawler_trophies_json = json.dumps({
         player.brawl_name: player.brawler_trophies for player in players
     })
+
+    player_info_json = json.dumps({
+        player.brawl_name: {
+            'total_trophies': player.total_trophies,
+            'solo_victories': player.solo_victories,
+            'duo_victories': player.duo_victories,
+            'threes_victories': player.threes_victories,
+        } for player in players
+    })
+
     
+
     return render(request, 'group_detail.html', {
         'group_id': group_id,
         'group': group,
         'players': players,
         'brawler_trophies': brawler_trophies_json,  # Pass the serialized brawler_trophies data
         'brawlers': brawlers,
+        'player_info': player_info_json,
     })
 
 def get_solo_victories(response):

@@ -6,6 +6,7 @@ import requests
 import os
 import json
 from dotenv import load_dotenv
+from collections import Counter
 load_dotenv()
 
 def create_group(request):
@@ -62,14 +63,16 @@ def group_detail(request, group_id):
     players = group.players.all()
     for player in players:
         response = authenticate(player.player_id)
+        response_battlelog = authenticate_battlelog(player.player_id)
         player.tilted_stats = find_tilted_brawlers(response)
         player.total_trophies = get_total_trophies(response)
         player.solo_victories = get_solo_victories(response)
         player.duo_victories = get_duo_victories(response)
         player.threes_victories = get_3v3_victories(response)
         player.brawler_trophies = get_brawler_trophies(response)
-        player.recent_win_rate = get_win_rate(player.player_id)
+        player.recent_win_rate = get_win_rate(response_battlelog)
         player.highest_trophies = get_highest_trophies(response)
+        player.favourite_gamemode = get_favourite_gamemode(response_battlelog)
 
     players = sorted(players, key=lambda x: x.total_trophies, reverse=True)
     brawler_response = get_brawlers_info()
@@ -87,7 +90,8 @@ def group_detail(request, group_id):
             'duo_victories': player.duo_victories,
             'threes_victories': player.threes_victories,
             'recent_win_rate': player.recent_win_rate,
-            'highest_trophies': player.highest_trophies
+            'highest_trophies': player.highest_trophies,
+            'favourite_gamemode': player.favourite_gamemode,
         } for player in players
     })
 
@@ -112,18 +116,30 @@ def get_duo_victories(response):
 def get_3v3_victories(response):
     return response.json()["3vs3Victories"]
 
-def get_win_rate(player):
+def get_favourite_gamemode(response):
+    gamemodes = Counter()
+    for gamemode in response.json()['items']:
+        gamemode = gamemode["battle"]
+        gamemodes[gamemode["mode"]] += 1
+    return gamemodes.most_common(1)[0][0]
+
+def get_favourite_brawler(response):
+    pass
+
+def authenticate_battlelog(player):
     url = f"https://api.brawlstars.com/v1/players/%23{player}/battlelog"
     headers = {
         "Authorization": "Bearer " + os.getenv("API_KEY")
     }
     response = requests.get(url, headers=headers)
+    return response
+
+def get_win_rate(response):
     victory_counter = 0
     loss_counter = 0
-    valid_gamemodes = ["gemGrab", "knockout", "brawlBall", "heist", "hotZone", "bounty", "wipeout"]
+    valid_gamemodes = ["gemGrab", "knockout", "brawlBall", "heist", "hotZone", "bounty", "wipeout", "duels"]
     for battle in response.json()['items']:
         battle = battle["battle"]
-        print(battle)
         if battle["mode"] in valid_gamemodes:
             if battle["result"] == "victory":
                 victory_counter += 1

@@ -34,19 +34,34 @@
       </div>
       <div id="player-stats" class="hidden">
         <h2>SELECTED PLAYER</h2>
-        <div class="card">
-          <h2>Brawler Trophies</h2>
-          <h4 id="player-trophies" class="player-trophies"></h4>
+        <div class="horizontal-container">
+          <div class="card">
+            <h2>Brawler Trophies</h2>
+            <h4 id="player-trophies" class="player-trophies"></h4>
+          </div>
+          <div class="card-small">
+            <h2>Trophies</h2>
+            <h4 id="total-trophies"></h4>
+            <h4 id="highest-trophies"></h4>
+          </div>
+          <div class="card-small">
+            <h2>Victories</h2>
+            <h4 id="solo-victories"></h4>
+            <h4 id="duo-victories"></h4>
+            <h4 id="threes-victories"></h4>
+          </div>
+          <div class="card-small">
+            <h2>Recent Win Rates</h2>
+            <h4 id="recent-win-rate"></h4>
+          </div>
         </div>
-        <h4 id="total-trophies"></h4>
-        <h4 id="solo-victories"></h4>
-        <h4 id="duo-victories"></h4>
-        <h4 id="threes-victories"></h4>
-        <h4 id="recent-win-rate"></h4>
-        <h4 id="highest-trophies"></h4>
+        <div class="horizontal-container">
+          <div class="card-small">
+            <h2>Recent Favourite Gamemode</h2>
+            <h4 id="favourite-gamemode"></h4>
+          </div>
+        </div>
       </div>
-      
-
     </div>
     
     <style>
@@ -101,12 +116,14 @@
             const threesVictories = document.getElementById("threes-victories");
             const recentWinRate = document.getElementById("recent-win-rate");
             const highestTrophies = document.getElementById("highest-trophies");
+            const favouriteGamemode = document.getElementById("favourite-gamemode");
             totalTrophies.textContent = playerInfo[playerName]['total_trophies'];
             soloVictories.textContent = playerInfo[playerName]['solo_victories'];
             duoVictories.textContent = playerInfo[playerName]['duo_victories'];
             threesVictories.textContent = playerInfo[playerName]['threes_victories'];
             recentWinRate.textContent = playerInfo[playerName]['recent_win_rate'];
-            highestTrophies.textContent = playerInfo[playerName]['highest_trophies']
+            highestTrophies.textContent = playerInfo[playerName]['highest_trophies'];
+            favouriteGamemode.textContent = playerInfo[playerName]['favourite_gamemode'];
 
             for (const [brawler, trophies] of Object.entries(brawlerTrophies[selectedPlayer])) {
               const trophyElement = document.createElement('div');

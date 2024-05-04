@@ -7,6 +7,7 @@ import os
 import json
 from dotenv import load_dotenv
 from collections import Counter
+import random
 load_dotenv()
 
 def create_group(request):
@@ -56,8 +57,6 @@ def edit_group_name(request, group_id):
         return redirect('group_detail', group_id=group_id)
     return render(request, 'edit_group_name.html', {'group': group})
 
-import json
-
 def group_detail(request, group_id):
     group = Group.objects.get(pk=group_id)
     players = group.players.all()
@@ -73,6 +72,7 @@ def group_detail(request, group_id):
         player.recent_win_rate = get_win_rate(response_battlelog)
         player.highest_trophies = get_highest_trophies(response)
         player.favourite_gamemode = get_favourite_gamemode(response_battlelog)
+        player.favourite_brawler = get_favourite_brawler(response_battlelog, player)
 
     players = sorted(players, key=lambda x: x.total_trophies, reverse=True)
     brawler_response = get_brawlers_info()
@@ -83,6 +83,8 @@ def group_detail(request, group_id):
         player.brawl_name: player.brawler_trophies for player in players
     })
 
+    fun_fact = get_fun_fact()
+
     player_info_json = json.dumps({
         player.brawl_name: {
             'total_trophies': player.total_trophies,
@@ -92,6 +94,7 @@ def group_detail(request, group_id):
             'recent_win_rate': player.recent_win_rate,
             'highest_trophies': player.highest_trophies,
             'favourite_gamemode': player.favourite_gamemode,
+            'favourite_brawler': player.favourite_brawler,
         } for player in players
     })
 
@@ -102,7 +105,20 @@ def group_detail(request, group_id):
         'brawler_trophies': brawler_trophies_json,  # Pass the serialized brawler_trophies data
         'brawlers': brawlers,
         'player_info': player_info_json,
+        'fun_fact': fun_fact
     })
+
+def get_fun_fact():
+    fun_facts = [
+        "Brawl Stars was beta for 2.5 years",
+        "Mortis' default skin had a hat",
+        "Pam was once called Mama J.",
+        "Leon's initial invisibility made him the game's most broken brawler at launch",
+        "Project Laser origins in 2015 as a multiplayer action shooter, evolving from Clash of Clans and Hay Day controls, laid the foundational idea for Brawl Stars",
+        "Sakura Spike used to be called Pinky Spike",
+        "Sakura Spike is undeniably the best Spike skin in the game :)"
+        ]
+    return fun_facts[random.randint(0, len(fun_facts) - 1)]
 
 def get_highest_trophies(response):
     return response.json()["highestTrophies"]
@@ -123,8 +139,18 @@ def get_favourite_gamemode(response):
         gamemodes[gamemode["mode"]] += 1
     return gamemodes.most_common(1)[0][0]
 
-def get_favourite_brawler(response):
-    pass
+def get_favourite_brawler(response, player):
+    brawlers = Counter()
+    for brawler in response.json()['items']:
+        try:
+            brawler = brawler["battle"]
+            brawler = brawler["teams"]
+            for item in brawler:
+                if item[0]['name'] == player.brawl_name:
+                    brawlers[item[0]['brawler']['name']] += 1
+        except:
+            continue
+    return brawlers.most_common(1)[0][0]
 
 def authenticate_battlelog(player):
     url = f"https://api.brawlstars.com/v1/players/%23{player}/battlelog"

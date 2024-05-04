@@ -45,7 +45,7 @@ body {
   h2 {
     border-top: 1px solid rgba(255, 255, 255, 0.5);
     color: rgba(255, 255, 255, 0.5);
-    font-weight: 100;
+    font-weight: 50px;
     font-size: 22px;
     line-height: 24px;
     padding-top: 30px;
@@ -212,7 +212,7 @@ ul {
     margin-top: 25px;
     margin-bottom: 25px;
     padding: 25px;
-    border-radius: 20px;
+    border-radius: 10px;
     background: linear-gradient(-45deg, #333333, #555555);
   }
 
@@ -228,7 +228,7 @@ ul {
   .card-small {
     flex: 0 0 auto; /* Let the cards shrink and grow as needed */
     width: 150px; /* Set a fixed width for each card */
-    height: 200px;
+    height: 215px;
     overflow-y: auto;
     border: 1px solid #ccc;
     margin-right: 20px; /* Add spacing between cards */
@@ -236,7 +236,7 @@ ul {
     margin-top: 25px;
     margin-bottom: 25px;
     padding: 25px;
-    border-radius: 20px;
+    border-radius: 10px;
     background: linear-gradient(-45deg, #333333, #555555);
   }
 
@@ -342,7 +342,7 @@ ul {
     background-color: #555555; /* Example background color */
     padding: 20px; /* Example padding */
     white-space: wrap;
-    height: 700px;
+    height: 850px;
     overflow-y: auto;
     margin-left: 20px;
     margin-right: 20px;
@@ -358,4 +358,8 @@ ul {
     opacity: 0;
     transform: translateX(-100%);
     transition: opacity 0.5s, transform 0.5s;
+  }
+
+  .grouping {
+    flex: 1;
   }

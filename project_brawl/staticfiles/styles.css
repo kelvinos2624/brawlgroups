@@ -1,0 +1,365 @@
+body {
+    /* Old browsers */
+    /*background: #141E30;
+    /* Chrome 10-25, Safari 5.1-6 */
+    /*background: -webkit-linear-gradient(-45deg, #35577D, #141E30);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #17171C;
+    margin: 0;
+    padding: 0;
+  }
+  
+  form {
+    color: white;
+    text-align: center;
+    font-size: 30px;
+  }
+
+  input {
+    font-size: 25px;
+    font-family: 'Playfair Display', serif;
+  }
+
+  button {
+    font-size: 25px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background: #3B82F6;
+    height: 50px;
+    color: white;
+    font-family: Georgia;
+    border: 1px solid #333333;
+  }
+
+  h1 {
+    color: white !important;
+    font-size: 2em;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    width: 100%;
+    font-family: Georgia;
+    text-align: center;
+  }
+  
+  h2 {
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 50px;
+    font-size: 22px;
+    line-height: 24px;
+    padding-top: 30px;
+    text-align: center;
+    width: 100%;
+    font-family: Georgia;
+  }
+
+  h3 {
+    color: white !important;
+  }
+
+  h4 {
+    color: white !important;
+  }
+  
+/* Style for an unordered list */
+ul {
+    list-style-type: none; /* Remove default bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    text-align: center;
+  }
+  
+  /* Style for list items */
+  li {
+    padding: 4px 0; /* Add padding above and below each list item */
+    color: white; /* Set text color to white */
+  }
+  
+
+  p {
+    color: white;
+    line-height: 1.3em;
+    text-align: center;
+    width: 100%;
+    font-family: Helvetica;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .byline {
+    font-family: Helvetica;
+    color: rgba(255, 255, 255, 0.5);
+    float: left;
+    font-size: 14px;
+    padding-left: 10px;
+    text-transform: uppercase;
+  }
+  
+  .caption {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 14px;
+    margin-left: 20px;
+    padding: 10px;
+    position: relative;
+    top: 80%;
+    width: 60%;
+    background-color: white;
+    color: black;
+  }
+  
+  .content {
+    padding: 40px;
+  }
+  
+  .image {
+    background-image: url('https://content.codecademy.com/courses/freelance-1/unit-2/soccer.jpeg');
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+  }
+  
+  .leaderboard {
+    flex: 0 0 auto; /* Let the cards shrink and grow as needed */
+    width: 300px; /* Set a fixed width for each card */
+    height: 100px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    margin-right: 20px; /* Add spacing between cards */
+    margin-left: 10px;
+    margin-top: 75px;
+    margin-bottom: -75px;
+    padding: 25px;
+    border-radius: 20px;
+    background: linear-gradient(-45deg, #333333, #555555);
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .player-info {
+    display: flex; /* Use flexbox to arrange player info horizontally */
+    align-items: center; /* Align items vertically within the player info */
+    justify-content: space-between; /* Space elements evenly along the main axis */
+    margin-bottom: 10px; /* Add margin between player info items */
+  }
+  
+  .player-name {
+    /* Add any desired styling for the player name */
+    color: white !important;
+  }
+  
+  .trophy-count {
+    /* Add any desired styling for the trophy count */
+    color: white !important;
+  }
+
+  .player-scroll-container {
+    flex: 1;
+    overflow-y: auto;
+    white-space: wrap;
+    max-height: 500px;
+    max-width: 292px;
+    background-color: #333333;
+  }
+
+  .player-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .player-card {
+    flex: 0 0 auto;
+    width: 250px;
+    height: 60px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    padding: 10px;
+    margin: 10px;
+    background-size: cover;
+    background-position: center;
+    transition: background-size 0.3s ease;
+    background-size: 120%;
+    border-radius: 1px;
+    box-shadow: 4px 4px 8px rgba(128, 128, 128, .75);
+  }
+
+  .player-card:hover {
+    transform: scale(1.05);
+    box-shadow: 4px 4px 8px rgba(255, 255, 255, 1);
+  }
+
+  .card-scroll-container {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent cards from wrapping */
+  }
+  
+  .card-container {
+    display: inline-flex; /* Use inline-flex to keep cards on the same row */
+  }
+  
+  .card {
+    flex: 0 0 auto; /* Let the cards shrink and grow as needed */
+    width: 300px; /* Set a fixed width for each card */
+    max-height: 500px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    margin-right: 20px; /* Add spacing between cards */
+    margin-left: 10px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 25px;
+    border-radius: 10px;
+    background: linear-gradient(-45deg, #333333, #555555);
+  }
+
+  .card-scroll-container-small {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .card-container-small {
+    display: inline-flex;
+  }
+
+  .card-small {
+    flex: 0 0 auto; /* Let the cards shrink and grow as needed */
+    width: 150px; /* Set a fixed width for each card */
+    height: 215px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    margin-right: 20px; /* Add spacing between cards */
+    margin-left: 10px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 25px;
+    border-radius: 10px;
+    background: linear-gradient(-45deg, #333333, #555555);
+  }
+
+  .brawler-icon-scroll-container {
+    overflow-x: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Distribute items evenly with extra space */
+}
+
+.brawler-icon-container {
+    display: inline-flex;
+}
+
+.brawler-icon {
+    flex: 0 0 auto;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    padding: 25px;
+    background-size: cover;
+    background-position: center;
+    transition: background-size 0.3s ease;
+    background-size: 120%;
+    box-shadow: 4px 4px 8px rgba(128, 128, 128, .75);
+}
+
+.brawl-icon-personal {
+  width: 125px;
+  height: 125px;
+  border: 1px solid #ccc;
+  margin: 1px; /* Adjust as needed */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background-size: cover;
+  flex-direction: column;
+}
+.brawl-icon-personal h4 {
+  margin-top: auto; /* Push the text to the bottom */
+}
+
+.highlight-text {
+  background-color: white;
+  color: black;
+  padding: 2px; /* Adjust padding as needed */
+}
+  .brawler-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 4px 4px 8px rgba(255, 255, 255, 1);
+  }
+  
+  .player-name {
+    font-weight: bold;
+  }
+  
+  .player-id {
+    margin-top: 5px;
+  }
+
+  .player-trophies {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    gap: 5px; /* Adjust spacing between trophies */
+}
+
+  .horizontal-container {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .writer-img {
+    -webkit-box-shadow: 5px 0px 5px 0px rgba(0, 0, 50, 0.97);
+    -moz-box-shadow: 5px 0px 5px 0px rgba(0, 0, 50, 0.97);
+    box-shadow: 5px 0px 5px 0px rgba(0, 0, 50, 0.97);
+    float: left;
+    width: 50px;
+  }
+
+  #brawler-info {
+    background-color: #333333;
+    color: #FFFFFF;
+    height: 500px;
+    overflow-y: hidden;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+
+  .fun-fact {
+    background-color: #333333;
+    color: #FFFFFF;
+    height: 200px;
+    overflow-y: hidden;
+    border-radius: 10px;
+  }
+  #player-stats {
+    flex: 1;
+    background-color: #555555; /* Example background color */
+    padding: 20px; /* Example padding */
+    white-space: wrap;
+    height: 850px;
+    overflow-y: auto;
+    margin-left: 20px;
+    margin-right: 20px;
+    transition: opacity 0.5s, transform 0.5s;
+  }
+
+  #player-stats:not(.hidden) {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .hidden {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+
+  .grouping {
+    flex: 1;
+  }

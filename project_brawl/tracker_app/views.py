@@ -155,7 +155,7 @@ def get_favourite_brawler(response, player):
 def authenticate_battlelog(player):
     url = f"https://api.brawlstars.com/v1/players/%23{player}/battlelog"
     headers = {
-        "Authorization": "Bearer " + os.getenv("API_KEY")
+        "Authorization": "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjVkZWRiZjFmLWRjNTMtNGM2MS1iOWM2LTQ0MDEzYjBmMzlmNCIsImlhdCI6MTcxNDgwMzcyMywic3ViIjoiZGV2ZWxvcGVyLzdiZjRlYmQ5LWIxODYtOTJkMS01NTczLTNlMmU3NTc2MzQzNSIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTA0LjE5Ni4yMzIuMjM3Il0sInR5cGUiOiJjbGllbnQifV19.Wcy1oniOi2rNHv9rAWlsy8vJ7lsKFtYX_-Wuhbn9D2IcKCF5XqN0emG0ldCGQcZpBazCfb8NxAENDlgMO5lIcA"
     }
     response = requests.get(url, headers=headers)
     return response
@@ -178,7 +178,7 @@ def get_win_rate(response):
 def authenticate(player):
     url = f"https://api.brawlstars.com/v1/players/%23{player}"
     headers = {
-        "Authorization": "Bearer " + os.getenv("API_KEY")
+        "Authorization": "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjVkZWRiZjFmLWRjNTMtNGM2MS1iOWM2LTQ0MDEzYjBmMzlmNCIsImlhdCI6MTcxNDgwMzcyMywic3ViIjoiZGV2ZWxvcGVyLzdiZjRlYmQ5LWIxODYtOTJkMS01NTczLTNlMmU3NTc2MzQzNSIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTA0LjE5Ni4yMzIuMjM3Il0sInR5cGUiOiJjbGllbnQifV19.Wcy1oniOi2rNHv9rAWlsy8vJ7lsKFtYX_-Wuhbn9D2IcKCF5XqN0emG0ldCGQcZpBazCfb8NxAENDlgMO5lIcA"
     }
     response = requests.get(url, headers=headers)
     return response
@@ -186,7 +186,7 @@ def authenticate(player):
 def get_brawlers_info():
     url = "https://api.brawlstars.com/v1/brawlers"
     headers = {
-        "Authorization": "Bearer " + os.getenv("API_KEY")
+        "Authorization": "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjVkZWRiZjFmLWRjNTMtNGM2MS1iOWM2LTQ0MDEzYjBmMzlmNCIsImlhdCI6MTcxNDgwMzcyMywic3ViIjoiZGV2ZWxvcGVyLzdiZjRlYmQ5LWIxODYtOTJkMS01NTczLTNlMmU3NTc2MzQzNSIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMTA0LjE5Ni4yMzIuMjM3Il0sInR5cGUiOiJjbGllbnQifV19.Wcy1oniOi2rNHv9rAWlsy8vJ7lsKFtYX_-Wuhbn9D2IcKCF5XqN0emG0ldCGQcZpBazCfb8NxAENDlgMO5lIcA"
     }
     return requests.get(url, headers=headers)
 

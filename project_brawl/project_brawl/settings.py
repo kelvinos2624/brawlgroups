@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-^$ofyd1n@2csd@jg*081sc8*uh_9l&xh7qv79&ahnweseqgwcm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['brawlgroups-production.up.railway.app']
 
 
 # Application definition

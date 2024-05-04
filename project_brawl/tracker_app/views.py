@@ -84,7 +84,6 @@ def group_detail(request, group_id):
     })
 
     fun_fact = get_fun_fact()
-
     player_info_json = json.dumps({
         player.brawl_name: {
             'total_trophies': player.total_trophies,
@@ -155,7 +154,7 @@ def get_favourite_brawler(response, player):
 def authenticate_battlelog(player):
     url = f"https://api.brawlstars.com/v1/players/%23{player}/battlelog"
     headers = {
-        "Authorization": "Bearer " + os.getenv("API_KEY")
+        "Authorization": "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjFkNGEwZDA0LWVmNjctNDRlNC1iMGM3LTY0OTViMGExZjM1ZiIsImlhdCI6MTcxNDg0MjUzNiwic3ViIjoiZGV2ZWxvcGVyLzdiZjRlYmQ5LWIxODYtOTJkMS01NTczLTNlMmU3NTc2MzQzNSIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMzUuMTg1LjIyNi42OSJdLCJ0eXBlIjoiY2xpZW50In1dfQ.-wvz00cfTPO6F-UtPIVMRqcx5sU4EZbc6yPlJEnk2lXqIAPwr8RWI4NxPhzWpsTuaY3qNErmt-CVdQZrnvuxUg"
     }
     response = requests.get(url, headers=headers)
     return response
@@ -178,7 +177,7 @@ def get_win_rate(response):
 def authenticate(player):
     url = f"https://api.brawlstars.com/v1/players/%23{player}"
     headers = {
-        "Authorization": "Bearer " + os.getenv("API_KEY")
+        "Authorization": "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjFkNGEwZDA0LWVmNjctNDRlNC1iMGM3LTY0OTViMGExZjM1ZiIsImlhdCI6MTcxNDg0MjUzNiwic3ViIjoiZGV2ZWxvcGVyLzdiZjRlYmQ5LWIxODYtOTJkMS01NTczLTNlMmU3NTc2MzQzNSIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMzUuMTg1LjIyNi42OSJdLCJ0eXBlIjoiY2xpZW50In1dfQ.-wvz00cfTPO6F-UtPIVMRqcx5sU4EZbc6yPlJEnk2lXqIAPwr8RWI4NxPhzWpsTuaY3qNErmt-CVdQZrnvuxUg"
     }
     response = requests.get(url, headers=headers)
     print(response.json())
@@ -187,7 +186,7 @@ def authenticate(player):
 def get_brawlers_info():
     url = "https://api.brawlstars.com/v1/brawlers"
     headers = {
-        "Authorization": "Bearer " + os.getenv("API_KEY")
+        "Authorization": "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjFkNGEwZDA0LWVmNjctNDRlNC1iMGM3LTY0OTViMGExZjM1ZiIsImlhdCI6MTcxNDg0MjUzNiwic3ViIjoiZGV2ZWxvcGVyLzdiZjRlYmQ5LWIxODYtOTJkMS01NTczLTNlMmU3NTc2MzQzNSIsInNjb3BlcyI6WyJicmF3bHN0YXJzIl0sImxpbWl0cyI6W3sidGllciI6ImRldmVsb3Blci9zaWx2ZXIiLCJ0eXBlIjoidGhyb3R0bGluZyJ9LHsiY2lkcnMiOlsiMzUuMTg1LjIyNi42OSJdLCJ0eXBlIjoiY2xpZW50In1dfQ.-wvz00cfTPO6F-UtPIVMRqcx5sU4EZbc6yPlJEnk2lXqIAPwr8RWI4NxPhzWpsTuaY3qNErmt-CVdQZrnvuxUg"
     }
     return requests.get(url, headers=headers)
 

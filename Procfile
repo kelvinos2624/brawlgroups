@@ -1,1 +1,1 @@
-web: gunicorn project_brawl.wsgi
+web: gunicorn project_brawl
